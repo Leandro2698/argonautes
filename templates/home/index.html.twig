@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% form_theme add_argonaute_form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Les Argonautes
+{% endblock %}
+
+{% block body %}
+	{# Formulaire pour rentrez les nouveaux argonautes #}
+	<main class="vh-100">
+
+		<section>
+			<div class="container ">
+				<div class="d-flex justify-content-center p-5">
+					<h1 class="text-center">Ajouter un(e) Argonaute</h1>
+				</div>
+				<div class="form-group">
+
+					{{ form_start(add_argonaute_form) }}
+					<div class="d-flex justify-content-center w-100">
+						{{form_row(add_argonaute_form.name,{'attr': {'placeholder': "Entrez son nom"}})}}
+					</div>
+
+
+					<div class="d-flex justify-content-center m-3">
+						<button type="submit" class="btn btn-primary p-2">Ajouter l'argonaute</button>
+					</div>
+
+					{{form_end(add_argonaute_form)}}
+
+				</div>
+
+			</div>
+		</section>
+		{# Liste des nouveaux argonautes #}
+		<section>
+			<div class="container p-3">
+				<div class="d-flex d-flex flex-column align-items-center p-3">
+					{% if argonautes %}
+						<h2>Membres de l'équipage</h2>
+					{% endif %}
+					<div class="row p-3">
+						{%for argonaute in argonautes %}
+							<div class="col-4 text-center p-5">
+								{{argonaute.name}}
+								<div>
+									<a href="{{path('delete_argonaute', {'id':argonaute.id})}}">
+										<i class="far fa-trash-alt"></i>
+									</a>
+								</div>
+
+							</div>
+						{% endfor %}
+
+					</div>
+				</div>
+
+			</div>
+
+		</section>
+
+	</main>
+
+	<footer class="position-relative">
+		<div class="bg-light text-center position-absolute top-100 end-0 w-100">
+			<div class="text-center p-3 bg-primary">
+				Réalisé par Leandro en Anthestérion de l'an 515 avant JC
+			</div>
+		</div>
+	</footer>
+</div>{% endblock %}
